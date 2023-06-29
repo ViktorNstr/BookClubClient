@@ -1,9 +1,7 @@
-import { useState, useEffect } from "react";
-import { useParams, Link } from 'react-router-dom';
+import { useState } from "react";
+import { Link, useParams } from 'react-router-dom';
 import axios from "axios";
-// import AddTask from "../components/AddTask";
-// import TaskCard from "../components/TaskCard";
-
+import AddEvent from "../components/AddEvent";
 
 const API_URL = "http://localhost:5005";
 
@@ -24,7 +22,7 @@ function EventDetailsPage (props) {
       )
       .then((response) => {
         const oneEvent = response.data;
-        setProject(oneEvent);
+        setEvent(oneEvent);
       })
       .catch((error) => console.log(error));
   };
@@ -46,16 +44,16 @@ function EventDetailsPage (props) {
       )}
 
       
-      <AddTask refreshEvent={getEvent} eventId={eventId} />          
+      <AddEvent refreshEvent={getEvent} eventId={eventId} />          
 
-      { event && event.tasks.map((task) => <TaskCard key={task._id} {...task} /> )} 
+      {/* { event && event.tasks.map((task) => <TaskCard key={task._id} {...task} /> )}  */}
 
       <Link to="/events">
-        <button>Back to projects</button>
+        <button>Back to Events</button>
       </Link>
           
       <Link to={`/events/edit/${eventId}`}>
-        <button>Edit Project</button>
+        <button>Edit Event</button>
       </Link>
       
     </div>

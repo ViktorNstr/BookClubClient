@@ -8,12 +8,12 @@ function EditEventPage(props) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   
-  const { eventID } = useParams();
+  const { eventId } = useParams();
   const navigate = useNavigate();
   
   useEffect(() => {
     axios
-      .get(`${API_URL}/api/events/${projectId}`)
+      .get(`${API_URL}/api/events/${eventId}`)
       .then((response) => {
         const oneEvent = response.data;
         setTitle(oneEvent.title);
@@ -21,7 +21,7 @@ function EditEventPage(props) {
       })
       .catch((error) => console.log(error));
     
-  }, [eventID]);
+  }, [eventId]);
   
 
   const handleFormSubmit = (e) => {
@@ -29,9 +29,9 @@ function EditEventPage(props) {
     const requestBody = { title, description };
 
     axios
-      .put(`${API_URL}/api/events/${eventID}`, requestBody)
+      .put(`${API_URL}/api/events/${eventId}`, requestBody)
       .then((response) => {
-        navigate(`/events/${eventID}`)
+        navigate(`/events/${eventId}`)
       });
   };
   
@@ -39,7 +39,7 @@ function EditEventPage(props) {
   const deleteEvent = () => {
     
     axios
-      .delete(`${API_URL}/api/events/${eventID}`)
+      .delete(`${API_URL}/api/events/${eventId}`)
       .then(() => {
         navigate("/events");
       })
